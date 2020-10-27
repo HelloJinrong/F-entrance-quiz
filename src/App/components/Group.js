@@ -9,7 +9,7 @@ class Group extends Component {
         groupList: {},
     }
 
-    showGroup=()=> {
+    showGroup = () => {
         URL = "http://localhost:8080/groups"
         fetch(URL, {method: "GET"})
             .then(Response => {
@@ -31,7 +31,7 @@ class Group extends Component {
             <div className="group">
                 <div className="title">
                     <h2>分组列表</h2>
-                    <Button type="primary" type="button" danger onClick={this.showGroup} >
+                    <Button type="primary" type="button" danger onClick={this.showGroup}>
                         分组学员
                     </Button>
                 </div>

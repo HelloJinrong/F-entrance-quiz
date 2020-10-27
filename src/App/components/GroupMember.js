@@ -1,15 +1,16 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 import '../style/GroupMember.css'
 
-class GroupMember extends Component{
-    state ={
+class GroupMember extends Component {
+    state = {
         student: this.props.student
     }
+
     render() {
-        return(
+        return (
             <div className="group-info">
                 {
-                    Object.keys(this.state.student).map((key)=>(
+                    Object.keys(this.state.student).map((key) => (
                         <p className="info">
                             {`${this.state.student[key].id}.
                     ${this.state.student[key].name}`}</p>
@@ -19,4 +20,5 @@ class GroupMember extends Component{
         )
     }
 }
+
 export default GroupMember;

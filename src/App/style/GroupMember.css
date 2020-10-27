@@ -1,9 +1,10 @@
-.group-info{
+.group-info {
     display: flex;
     flex-direction: row;
     margin-left: 20px;
     text-align: center;
 }
+
 .info {
     background-color: #eeeeee;
     width: 100px;

@@ -11,15 +11,16 @@
     margin: 10px;
 }
 
-h2{
+h2 {
     margin-left: 10px;
 }
 
-.add-student{
+.add-student {
     height: 30px;
     margin-left: 20px;
     margin-top: 5px;
 }
-.tag-input{
+
+.tag-input {
     width: 200px !important;
 }

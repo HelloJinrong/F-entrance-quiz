@@ -18,13 +18,13 @@ class Students extends Component {
     showStudents = () => {
         const URL = "http://localhost:8080/students";
         fetch(URL, {method: "GET"})
-        .then(Response => {
-            if (Response.status == 200) {
-                return Response.json();
-            } else {
-                Promise.reject();
-            }
-        }).then(jsonData => {
+            .then(Response => {
+                if (Response.status == 200) {
+                    return Response.json();
+                } else {
+                    Promise.reject();
+                }
+            }).then(jsonData => {
             this.setState({
                 studentList: jsonData
             })
@@ -76,12 +76,7 @@ class Students extends Component {
                     />)}
                     {!this.state.formVisible && (
                         <Button className="add-student" onClick={this.add}><PlusOutlined/>添加学员</Button>)}
-
-
                 </div>
-
-
-
             </div>
         )
     }

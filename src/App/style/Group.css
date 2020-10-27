@@ -1,12 +1,13 @@
-.title{
+.title {
     display: flex;
 }
-h2{
+
+h2 {
     margin-right: 1000px;
 }
 
-.group-content{
-    diplay:flex;
+.group-content {
+    diplay: flex;
     flex-direction: column;
 
 }
