@@ -19,7 +19,7 @@ class Students extends Component {
         const URL = "http://localhost:8080/students";
         fetch(URL, {method: "GET"})
             .then(Response => {
-                if (Response.status == 200) {
+                if (Response.status === 200) {
                     return Response.json();
                 } else {
                     Promise.reject();
