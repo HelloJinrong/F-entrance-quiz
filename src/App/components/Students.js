@@ -65,12 +65,9 @@ class Students extends Component {
                             {`${this.state.studentList[key].id}. ${this.state.studentList[key].name}`}
                         </p>
                     ))}
-
-                </div>
-                <div className="add-student">
                     {this.state.formVisible && (<Input
                         type="text"
-                        size="small"
+                        defaultValue="请输入姓名,按回车结束"
                         className="tag-input"
                         value={this.state.name}
                         onChange={this.handleInputChange}
@@ -79,7 +76,10 @@ class Students extends Component {
                     />)}
                     {!this.state.formVisible && (
                         <Button className="add-student" onClick={this.add}><PlusOutlined/>添加学员</Button>)}
+
+
                 </div>
+
 
 
             </div>
