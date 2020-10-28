@@ -61,7 +61,7 @@ class Students extends Component {
                 <h2>学员列表</h2>
                 <div className="content">
                     {Object.keys(this.state.studentList).map((key) => (
-                        <p className="info">
+                        <p className="info" key={key}>
                             {`${this.state.studentList[key].id}. ${this.state.studentList[key].name}`}
                         </p>
                     ))}

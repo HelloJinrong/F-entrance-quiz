@@ -6,7 +6,7 @@ import '../style/Group.css';
 
 class Group extends Component {
     state = {
-        groupList: {},
+        groupList: [],
     }
 
     showGroup = () => {
@@ -27,6 +27,7 @@ class Group extends Component {
     }
 
     render() {
+        console.log(this.state.groupList);
         return (
             <div className="group">
                 <div className="title">
@@ -37,11 +38,14 @@ class Group extends Component {
                 </div>
                 <div className="group-content">
                     {
-                        Object.keys(this.state.groupList).map((key) => (
-                            <div className="student-name">
+                        this.state.groupList.map((group) => (
+                            <div className="student-name" key={group.name}>
                                 <GroupName
-                                    name={this.state.groupList[key].name}/>
-                                <GroupMember student={this.state.groupList[key].students}/>
+                                    name={group.name}/>
+                                <GroupMember students={group.students}/>
+                                {/*{
+                                    JSON.toString(group.students)
+                                }*/}
                             </div>
                         ))
                     }
