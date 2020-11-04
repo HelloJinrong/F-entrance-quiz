@@ -3,7 +3,6 @@ import "../style/Students.css"
 import {Button, Input} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 
-
 class Students extends Component {
     state = {
         studentList: [],
@@ -16,12 +15,14 @@ class Students extends Component {
     }
 
     showStudents = () => {
+        // TODO GTB-工程实践: - 请求API的代码应该抽取到一个单独的组件
         const URL = "http://localhost:8080/students";
         fetch(URL, {method: "GET"})
             .then(Response => {
                 if (Response.status === 200) {
                     return Response.json();
                 } else {
+                    // TODO GTB-知识点: - .then的第一个参数是Promise resolved的情况，为什么这里你要自己build一个rejected的Promise？
                     Promise.reject();
                 }
             }).then(jsonData => {
@@ -32,6 +33,7 @@ class Students extends Component {
     }
 
     addStudent = (event) => {
+        // TODO GTB-工程实践: - 以下请求API的代码应该抽取到一个单独的组件
         event.preventDefault();
         let item = {name: this.state.name}
         let header = {
@@ -50,7 +52,7 @@ class Students extends Component {
     handleInputChange = (e) => {
         this.setState({name: e.target.value});
     };
-
+    // TODO GTB-工程实践: - 方法的名字太宽泛，没有体现业务逻辑
     add = () => {
         this.setState({formVisible: true});
     }
@@ -60,11 +62,14 @@ class Students extends Component {
             <div className="student-list">
                 <h2>学员列表</h2>
                 <div className="content">
+                    {/* // TODO GTB-知识点: - 这里可以就用this.state.studentList来做map，为什么要使用Object.keys？*/}
                     {Object.keys(this.state.studentList).map((key) => (
                         <p className="info" key={key}>
                             {`${this.state.studentList[key].id}. ${this.state.studentList[key].name}`}
                         </p>
                     ))}
+                    {/* // TODO GTB-完成度: - 不应该在onBlur的时候添加学生*/}
+                    {/* // TODO GTB-知识点: - 这里应该使用onKeyUp事件而不是onPressEnter*/}
                     {this.state.formVisible && (<Input
                         type="text"
                         defaultValue="请输入姓名,按回车结束"
