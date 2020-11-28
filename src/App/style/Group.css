@@ -12,3 +12,7 @@ h2 {
 
 }
 
+.student-name {
+    border: 2px solid #929aab;
+    margin: 20px;
+}

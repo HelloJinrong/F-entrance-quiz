@@ -1,21 +1,17 @@
-import React, {Component} from "react";
+import React, {useState,useEffect} from "react";
 import "../style/Students.css"
 import {Button, Input} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 
 
-class Students extends Component {
-    state = {
-        studentList: [],
-        formVisible: false,
-        name: ''
-    }
+export default function Students()
+{
+    const [studentList,setStudentList]=useState([]);
+    const [formVisible,setVisible]=useState(false);
+    const [name,setName]=useState('')
+    useEffect(()=>{showStudents()},[])
 
-    componentDidMount() {
-        this.showStudents();
-    }
-
-    showStudents = () => {
+  function showStudents() {
         const URL = "http://localhost:8080/students";
         fetch(URL, {method: "GET"})
             .then(Response => {
@@ -25,61 +21,47 @@ class Students extends Component {
                     Promise.reject();
                 }
             }).then(jsonData => {
-            this.setState({
-                studentList: jsonData
-            })
+            setStudentList(jsonData)
         })
     }
 
-    addStudent = (event) => {
+    function addStudent (event) {
         event.preventDefault();
-        let item = {name: this.state.name}
         let header = {
             method: "POST",
-            body: JSON.stringify(item),
+            body: JSON.stringify(name),
             headers: {
                 'content-type': 'application/json'
             }
         }
-        fetch("http://localhost:8080/students/", header).then(() => this.showStudents());
-        this.setState({
-            formVisible: false,
-            name: '',
-        });
-    }
-    handleInputChange = (e) => {
-        this.setState({name: e.target.value});
-    };
-
-    add = () => {
-        this.setState({formVisible: true});
+        fetch("http://localhost:8080/students/", header).then(() => showStudents());
+        setVisible(false)
+        setName('')
     }
 
-    render() {
         return (
             <div className="student-list">
                 <h2>学员列表</h2>
                 <div className="content">
-                    {Object.keys(this.state.studentList).map((key) => (
+                    {Object.keys(studentList).map((key) => (
                         <p className="info" key={key}>
-                            {`${this.state.studentList[key].id}. ${this.state.studentList[key].name}`}
+                            {`${studentList[key].id}. ${studentList[key].name}`}
                         </p>
                     ))}
-                    {this.state.formVisible && (<Input
+                    {formVisible && (<Input
                         type="text"
                         defaultValue="请输入姓名,按回车结束"
                         className="tag-input"
-                        value={this.state.name}
-                        onChange={this.handleInputChange}
-                        onBlur={this.addStudent}
-                        onPressEnter={this.addStudent}
+                        value={name}
+                        onChange={(e)=>{setName(e.target.value)}}
+                        onBlur={addStudent}
+                        onPressEnter={()=>{setVisible(true)}}
                     />)}
-                    {!this.state.formVisible && (
-                        <Button className="add-student" onClick={this.add}><PlusOutlined/>添加学员</Button>)}
+                    {!formVisible && (
+                        <Button className="add-student" onClick={()=>{setVisible(true)}}><PlusOutlined/>添加学员</Button>)}
                 </div>
             </div>
         )
-    }
+
 }
 
-export default Students;
